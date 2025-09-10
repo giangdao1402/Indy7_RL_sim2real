@@ -118,7 +118,7 @@ if __name__ == "__main__":
         
         print("target position in degree: ", target_pos_deg)
         # # Gửi lệnh tới robot nếu muốn
-        # policy.robot.movej(target_pos_deg, vel_ratio=5, acc_ratio=5)
+        policy.robot.movej(target_pos_deg, vel_ratio=5, acc_ratio=5)
         while policy.robot.get_motion_data()["has_motion"]:
             time.sleep(0.01)
 

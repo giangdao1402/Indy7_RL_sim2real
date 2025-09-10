@@ -20,9 +20,9 @@ def quat_from_euler_xyz(roll: torch.Tensor, pitch: torch.Tensor, yaw: torch.Tens
 
 # ---------------- Test ----------------
 # pose: [x, y, z, roll, pitch, yaw]
-pose = [0.44904,
-        -0.18630,
-         0.40986,
+pose = [0.40012,
+        -0.40291,
+         0.34319,
          3.14,  # roll
          0,                 # pitch
          3.14]   # yaw
