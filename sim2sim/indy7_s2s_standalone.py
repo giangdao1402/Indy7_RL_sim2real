@@ -90,10 +90,10 @@ while simulation_app.is_running():
         #     # forward
         #     base_command = np.array([0.35, -0.18, 0.45, 0, math.pi, 3.14])
         # elif i < 130:
-        #     # rotate (đổi góc)
+        #     # rotate 
         #     base_command = np.array([0.35, -0.18, 0.60, 0, math.pi, 3.14])
         # elif i < 200:
-        #     # side ways (đổi x/y)
+        #     # side ways
         #     base_command = np.array([0.85, -0.8, 0.80, 0, math.pi, 3.14])
         # else:
         #     i = 0

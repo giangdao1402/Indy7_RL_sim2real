@@ -4,8 +4,6 @@ from pathlib import Path
 from neuromeka import IndyDCP3
 from controllers.policy_controller import PolicyController
 class IndyReachPolicyNoHistory(PolicyController):
-    """Policy controller cho Indy Reach KHÔNG dùng history."""
-
     def __init__(self, robot_ip) -> None:
         super().__init__()
 
@@ -29,7 +27,7 @@ class IndyReachPolicyNoHistory(PolicyController):
         self._policy_counter = 0
 
         # Command pose (xyz + quaternion)
-        self.target_command = np.array([0.350, -0.18649, 0.52197, 0, 0, 1, 0], dtype=np.float32)
+        self.target_command = np.array([0.63562, -0.18114, 0.36896, 0.02937134, -0.05713603, -0.9978916, 0.00923067], dtype=np.float32)
 
 
         # Joint data
@@ -51,7 +49,6 @@ class IndyReachPolicyNoHistory(PolicyController):
         self.has_joint_data = True
 
     def _compute_observation(self, command: np.ndarray) -> np.ndarray:
-        """Build observation vector KHÔNG dùng history."""
         if not self.has_joint_data:
             return None
         print("current_joint_pos: ", self.current_joint_positions)
@@ -79,7 +76,6 @@ class IndyReachPolicyNoHistory(PolicyController):
             if obs is None:
                 return None
 
-            # Lấy action từ policy controller
             self.action = self._compute_action(obs)
 
             # Debug print
@@ -99,7 +95,7 @@ class IndyReachPolicyNoHistory(PolicyController):
 
 
 if __name__ == "__main__":
-    ROBOT_IP = "192.168.0.102"
+    ROBOT_IP = "192.168.1.95"
     policy = IndyReachPolicyNoHistory(ROBOT_IP)
 
     # Move to home
@@ -117,7 +113,6 @@ if __name__ == "__main__":
         target_pos_deg = np.degrees(target_pos_rad).tolist()
         
         print("target position in degree: ", target_pos_deg)
-        # # Gửi lệnh tới robot nếu muốn
         policy.robot.movej(target_pos_deg, vel_ratio=5, acc_ratio=5)
         while policy.robot.get_motion_data()["has_motion"]:
             time.sleep(0.01)

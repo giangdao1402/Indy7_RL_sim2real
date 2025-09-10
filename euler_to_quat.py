@@ -1,5 +1,5 @@
 import torch
-
+import math
 def quat_from_euler_xyz(roll: torch.Tensor, pitch: torch.Tensor, yaw: torch.Tensor) -> torch.Tensor:
     """Convert rotations given as Euler angles in radians to Quaternions.
        Convention: XYZ, return format (w, x, y, z)
@@ -23,9 +23,9 @@ def quat_from_euler_xyz(roll: torch.Tensor, pitch: torch.Tensor, yaw: torch.Tens
 pose = [0.40012,
         -0.40291,
          0.34319,
-         3.14,  # roll
-         0,                 # pitch
-         3.14]   # yaw
+         math.radians(-178.75),  # roll
+         math.radians(-3.30),                 # pitch
+         math.radians(173.41)]   # yaw
 
 x, y, z, roll, pitch, yaw = pose
 

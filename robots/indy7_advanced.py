@@ -61,26 +61,22 @@ class IndyReachPolicy(PolicyController):
         self.has_joint_data = True
 
     def _update_histories(self):
-        """Cập nhật lịch sử đúng như training."""
         self.joint_pos_history.pop(0)
-        self.joint_pos_history.append(self.prev_joint_pos)  # step trước
+        self.joint_pos_history.append(self.prev_joint_pos)  
         
         self.joint_vel_history.pop(0)
-        self.joint_vel_history.append(self.prev_joint_vel)  # step trước
+        self.joint_vel_history.append(self.prev_joint_vel)  
         
         self.action_history.pop(0)
-        self.action_history.append(self._previous_action)   # step trước
+        self.action_history.append(self._previous_action)  
 
     def _compute_observation(self, command: np.ndarray) -> np.ndarray:
-        """Build observation vector (không noise)."""
         if not self.has_joint_data:
             return None
 
-        # Lưu lại state hiện tại cho step sau
         self.prev_joint_pos = self.current_joint_positions - self.default_pos
         self.prev_joint_vel = self.current_joint_velocities
 
-        # Dữ liệu chính
         joint_pos = self.prev_joint_pos
         joint_vel = self.prev_joint_vel
         pose_command = command.astype(np.float32)
@@ -111,7 +107,6 @@ class IndyReachPolicy(PolicyController):
             if obs is None:
                 return None
 
-            # Lấy action từ policy controller
             self.action = self._compute_action(obs)
             # self._previous_action = self.action * self._action_scale
             self._previous_action = self.action.copy()
