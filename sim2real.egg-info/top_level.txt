@@ -1,4 +1,0 @@
-controllers
-robots
-sim2sim
-utils
